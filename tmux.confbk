@@ -1,4 +1,4 @@
-set -ag terminal-overrides ",xterm-256color:RGB"
+set-option -sa terminal-overrides ",xterm*:Tc"
 set -g mouse on
 
 unbind C-b
@@ -25,13 +25,29 @@ bind -n S-Right next-window
 bind -n M-H previous-window
 bind -n M-L next-window
 
-bind b set-option -g status
+
+set -g @catppuccin_window_right_separator "█"
+set -g @catppuccin_window_number_position "left"
+set -g @catppuccin_window_default_fill "number"
+set -g @catppuccin_window_default_text "#W"
+set -g @catppuccin_window_default_background "#1e1e2e"
+
+set -g @catppuccin_window_current_fill "number"
+set -g @catppuccin_window_current_text "#W"
+set -g @catppuccin_window_current_background "#313144"
+
+set -g @catppuccin_status_modules_right "application session host date_time"
+set -g @catppuccin_status_left_separator "█"
+set -g @catppuccin_status_right_separator "█"
+
+set -g @catppuccin_date_time_text "%Y-%m-%d %H:%M:%S"
 
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'christoomey/vim-tmux-navigator'
-# set -g @plugin 'catppuccin/tmux'
+set -g @plugin 'catppuccin/tmux'
 set -g @plugin 'tmux-plugins/tmux-yank'
+set-option -g status-position top
 
 run '~/.config/tmux/plugins/tpm/tpm'
 
@@ -45,17 +61,4 @@ bind-key u run-shell  'tmux popup -E tshort bind 1'
 
 bind '"' split-window -v -c "#{pane_current_path}"
 bind % split-window -h -c "#{pane_current_path}"
-
-set-option -g status-left-length 200
-set-option -g status-left " #{session_name} "
-set-option -g status-right " "
-set-option -g status-style "bg=default fg=#cba6f7"
-
-set-option -g window-status-format " #{window_index}:#{window_name} #{window_flags} "
-set-option -g window-status-current-format " #{window_index}:#{window_name} #{window_flags} "
-set-option -g window-status-current-style "fg=#ccd5f0"
-set-option -g window-status-last-style "fg=#545862"
-set-option -g window-status-activity-style none
-
-set -g status-justify left
 
